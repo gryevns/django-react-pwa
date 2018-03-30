@@ -12,9 +12,33 @@ def time(request):
 
 
 urlpatterns = [
-    path('login/', login, name='login'),
-    path('logout/', logout, name='logout'),
-    path('time/', time, name='time'),
-    path('sw.js', TemplateView.as_view(template_name="sw.js", content_type='application/javascript'), name='sw.js'),
-    path('', TemplateView.as_view(template_name='app.html')),
+    path(
+        'login/',
+        login,
+        name='login',
+    ),
+    path(
+        'logout/',
+        logout,
+        name='logout',
+    ),
+    path(
+        'time/',
+        time,
+        name='time',
+    ),
+    path(
+        'sw.js',
+        TemplateView.as_view(template_name="sw.js", content_type='application/javascript'),
+        name='sw.js',
+    ),
+    path(
+        'manifest.json',
+        TemplateView.as_view(template_name="manifest.json", content_type='application/manifest+json'),
+        name='manifest',
+    ),
+    path(
+        '',
+        TemplateView.as_view(template_name='app.html'),
+    ),
 ]
