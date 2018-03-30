@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block scripts %}
+<script src="/sw.js"></script>
+<script src="{% static 'js/fetch.min.js' %}"></script>
+<script src="{% static 'js/react.min.js' %}"></script>
+<script src="{% static 'js/react-dom.min.js' %}"></script>
+
+<script type="text/javascript">
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: '',
+        }
+        this.onClick = this.onClick.bind(this)
+        registerServiceWorker()
+    }
+    async onClick() {
+        const response = await fetch("time/", {
+            credentials: 'include',
+        });
+        const status = await response.status
+        if (status == 401) {
+            // clear cache here
+            document.location = 'login/'
+        } else {
+            const data = await response.json()
+            this.setState({ value: data.now })
+        }
+    }
+    render() {
+        return (
+            React.createElement('div', null,
+                React.createElement('p', null, this.state.value),
+                React.createElement('button', {onClick: this.onClick}, 'Get Time'),
+                React.createElement('button', {onClick: () => document.location = 'logout/'}, 'Logout'),
+            )
+        );
+    }
+}
+ReactDOM.render(
+    React.createElement(App),
+    document.getElementById('root')
+);
+</script>
+{% endblock %}
