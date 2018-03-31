@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block content %}
+<noscript>
+This page requires JavaScript.
+</noscript>
+{% endblock %}
+
 {% block scripts %}
 <script src="/sw.js"></script>
 <script src="{% static 'js/fetch.min.js' %}"></script>

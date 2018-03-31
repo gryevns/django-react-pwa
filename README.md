@@ -2,6 +2,8 @@
 
 Minimal boilerplate using Django default cookie based session authentication, ReactJS, and service worker.
 
+![Lighthouse Report](https://raw.githubusercontent.com/gryevns/django-react-pwa/master/lighthouse.png)
+
 ## Install
 
 ```sh
